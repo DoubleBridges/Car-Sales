@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CarContext } from '../contexts/carContext'
 import AdditionalFeature from './AdditionalFeature';
 
 const AdditionalFeatures = props => {
+
+  const state = useContext(CarContext)
+
   return (
     <div className="content">
       <h4>Additional Features</h4>
-      {props.store.length ? (
+      {state.store.length ? (
         <ol type="1">
-          {props.store.map(item => (
-            <AdditionalFeature key={item.id} feature={item} />
+          {state.store.map(item => (
+            <AdditionalFeature key={item.id} feature={item} buyItem={e => props.addItem(e, item)}/>
           ))}
         </ol>
       ) : (
