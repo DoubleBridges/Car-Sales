@@ -5,6 +5,5 @@ export const removeFeature = item => {
 
 export const BUY_ITEM = 'BUY_ITEM'
 export const buyItem = item => {
-  console.log('buying parts')
   return { type: BUY_ITEM, payload: item}
 };

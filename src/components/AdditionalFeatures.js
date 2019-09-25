@@ -4,13 +4,14 @@ import { buyItem } from '../actions'
 import { carReducer, initialState } from '../reducers'
 
 
-const AdditionalFeatures = props => {
+const AdditionalFeatures = () => {
 
   const [state, dispatch] = useReducer(carReducer, initialState);
 
   const addItem = (e, item) => {
     e.preventDefault()
     dispatch(buyItem(item))
+    localStorage.setItem('state', JSON.stringify(state))
   }
 
   return (
@@ -28,7 +29,5 @@ const AdditionalFeatures = props => {
     </div>
   );
 };
-
-
 
 export default AdditionalFeatures;
