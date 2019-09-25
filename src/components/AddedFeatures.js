@@ -26,7 +26,6 @@ const AddedFeatures = props => {
 };
 
 const mapStateToProps = state => {
-  console.log('mSTP', state)
   return {
     car: state.car
   }

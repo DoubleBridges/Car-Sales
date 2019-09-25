@@ -1,22 +1,24 @@
-import React from 'react';
-import { connect } from 'react-redux'
+import React, { useReducer } from 'react';
 import AdditionalFeature from './AdditionalFeature';
 import { buyItem } from '../actions'
+import { carReducer, initialState } from '../reducers'
+
 
 const AdditionalFeatures = props => {
 
+  const [state, dispatch] = useReducer(carReducer, initialState);
 
   const addItem = (e, item) => {
     e.preventDefault()
-    props.buyItem(item)
+    dispatch(buyItem(item))
   }
 
   return (
     <div className="content">
       <h4>Additional Features</h4>
-      {props.store.length ? (
+      {state.store.length ? (
         <ol type="1">
-          {props.store.map(item => (
+          {state.store.map(item => (
             <AdditionalFeature key={item.id} feature={item} buyItem={e => addItem(e, item)}/>
           ))}
         </ol>
@@ -27,12 +29,6 @@ const AdditionalFeatures = props => {
   );
 };
 
-const mapStateToProps = state => {
-  console.log('mSTP', state)
-  return {
-    car: state.car,
-    store: state.store
-  }
-}
 
-export default connect(mapStateToProps, {buyItem})(AdditionalFeatures);
+
+export default AdditionalFeatures;
