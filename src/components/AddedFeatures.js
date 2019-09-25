@@ -1,17 +1,10 @@
-import React, { useReducer } from 'react';
-import { removeFeature } from '../actions'
+import React, { useContext } from 'react';
+import { CarContext } from '../contexts/carContext'
 import AddedFeature from './AddedFeature';
-import { carReducer, initialState } from '../reducers';
 
-const AddedFeatures = () => {
+const AddedFeatures = props => {
 
-  const [state, dispatch] = useReducer(carReducer, initialState)
-
-  const removeItem = (e, item) => {
-    e.preventDefault()
-    dispatch(removeFeature(item))
-    localStorage.setItem('state', JSON.stringify(state))
-  }
+  const state = useContext(CarContext)
 
   return (
     <div className="content">
@@ -19,7 +12,7 @@ const AddedFeatures = () => {
       {state.car.features.length ? (
         <ol type="1">
           {state.car.features.map(item => (
-            <AddedFeature key={item.id} feature={item} removeItem={e => removeItem(e, item)}/>
+            <AddedFeature key={item.id} feature={item} removeItem={e => props.removeItem(e, item)}/>
           ))}
         </ol>
       ) : (
